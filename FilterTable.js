@@ -39,7 +39,8 @@
         }
         else if (type == 'sel') {
           search_row += "<select id='FtSearch-" + column + '-' + type + "' style='width: 90%;'><option></option>";
-          $.each($this.data('column-values'), function(i, v) {
+          var opts = $this.data('column-values') ? $this.data('column-values') : $.map(this.filters[column].group().all(),function(v, i){return v.key;});
+          $.each(opts, function(i, v) {
             search_row += "<option value='" + v + "'>" + v + '</option>';
           });
           search_row += '</select>';
@@ -48,7 +49,10 @@
           search_row += "<input type='text' id='FtSearch-" + column + '-' + type + "-min' style='margin-right: 1px; width: 25px;' placeholder='min' />";
           search_row += "<input type='text' id='FtSearch-" + column + '-' + type + "-max' style='width: 25px;' placeholder='max' />";
         }
-        search_row += '</td>';
+        else {
+          search_row += '&nbsp;';
+        }
+        search_row += '</th>';
       }, this));
       search_row += '</tr>';
       search_row = $(search_row);

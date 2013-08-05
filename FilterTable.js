@@ -23,7 +23,7 @@
 
       $.each(data[0], $.proxy(function(k, v) {
         if (k.indexOf('id') == -1) {
-          this.filters[k] = this.table.dimension(function(d) {return d[k].toLowerCase ? d[k].toLowerCase() : d[k];});
+          this.filters[k] = this.table.dimension(function(d) {return d[k] != null ? (d[k].toLowerCase ? d[k].toLowerCase() : d[k]) : "";});
         }
       }, this));
 
